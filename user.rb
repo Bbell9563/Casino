@@ -1,10 +1,9 @@
 require_relative 'wallet'
 
 class User
-  attr_accessor :name, :wallet, :age
-  def initialize(name, wallet, age)
+  attr_accessor :name, :age
+  def initialize(name, age)
     @name = name
-    @wallet = wallet
     @age = age
   end
 
