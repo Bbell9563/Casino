@@ -25,15 +25,25 @@ class Deck
         @cards << Card.new(@ranks[i], suit, color)
       end
     end
+    @cards.shuffle
   end
  
    def display_cards
-     @cards.shuffle.each do |card|
+     @cards.each do |card|
        puts "#{card.rank} #{card.suit} (#{card.color})"
      end
+   end
+
+   def deal(number)
+    dealt = @cards.sample(number)
+    dealt.each do |card|
+      @cards.shift(1)
+      puts "#{card.rank} #{card.suit} (#{card.color})"
+    end
    end
  end
   
 
  # Instantiate a new deck
 # d = Deck.new
+# d.deal(2) 
