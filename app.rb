@@ -1,10 +1,14 @@
 # require_relative = 'deck'
 # require_relative = 'dice'
 require_relative 'user'
+require_relative 'wallet'
 
 class App 
     def initialize
         @user = User.new
+        @wallet = Wallet.new(100)
+        #to add things to this wallet use => @wallet.add("put the integer inside that you want to add")
+        #to subtract an amount from the wallet use => @wallet.remove("put the integer inside that you want to subtract")
         menu()
     end
     def menu 

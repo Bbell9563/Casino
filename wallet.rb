@@ -13,7 +13,3 @@ class Wallet
   end
 
 end
-
-wallet = Wallet.new(100)
-wallet.add(20)
-puts wallet.amount
