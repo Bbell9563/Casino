@@ -1,6 +1,6 @@
 require_relative 'card'
 
-class Deck
+class Deck 
   # Getter and Setter methods for rank, suit and color
   attr_accessor :cards
  
@@ -14,7 +14,7 @@ class Deck
   end
  
   def shuffle_cards
-   @cards.shuffle
+   @cards.shuffle!
   end
   
   def generate_deck
@@ -25,7 +25,7 @@ class Deck
         @cards << Card.new(@ranks[i], suit, color)
       end
     end
-    @cards.shuffle
+    shuffle_cards
   end
  
    def display_cards
@@ -34,12 +34,13 @@ class Deck
      end
    end
 
-   def deal(number)
-    dealt = @cards.sample(number)
-    dealt.each do |card|
-      @cards.shift(1)
-      puts "#{card.rank} #{card.suit} (#{card.color})"
-    end
+
+   def deal
+
+    dealt = @cards.pop
+    puts "#{dealt.rank} #{dealt.suit} (#{dealt.color})"
+    return dealt 
+
    end
  end
   

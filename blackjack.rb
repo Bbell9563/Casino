@@ -2,7 +2,7 @@ require_relative 'deck'
 require_relative 'card'
 # require_relative 'app'
 
-class Blackjack
+class Blackjack 
   def initialize
     @deck = Deck.new
     @player_cards = []
@@ -13,17 +13,25 @@ class Blackjack
   end
 
   def deal_player_cards
-    @player_cards << @deck.deal(2)
+    @player_cards << @deck.deal
+    @player_cards << @deck.deal
+    
+
   end
 
   def deal_dealer_cards
-    @deck.deal(2)
+    @dealer_score <<@deck.deal
+    @dealer_score <<@deck.deal
   end
 
   def add_player_score
     @player_cards.each do |card|
-      first_char = card.to_s[3]
-      puts card.display_card
+      if card.rank.to_s == 'A'
+        puts "there is an A"
+      end
+      
+
+     
 
     end 
 

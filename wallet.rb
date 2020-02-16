@@ -31,3 +31,4 @@ else
   puts "returned false"
 end
 
+wallet.add(user_iputs)
