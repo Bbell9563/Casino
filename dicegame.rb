@@ -23,6 +23,10 @@ class Dicegame
   
   def place_your_bet
     puts "You have #{@wallet.amount}" #link wallet
+      if @wallet.amount == 0
+        puts "You dont have any money left, come back when you get your paycheck!"
+        exit!
+      end
     puts "How much would you like to bet?"
     @get_bet = get_your_bet = gets.to_i
     if get_your_bet > 0
@@ -30,12 +34,18 @@ class Dicegame
         @betmade += get_your_bet
         puts "You bet #{get_your_bet}"
       else
-        puts "Bet a different number"
+        puts "---------------------------------"
+        puts "You don't have the required funds"
+        puts "Bet a different amount"
+        puts "---------------------------------"
         place_your_bet
       end
 
     else 
+      puts "---------------------------------"
+      puts "you don't have the required funds"
       puts "Bet a different number"
+      puts "---------------------------------"
       place_your_bet
     end
 
@@ -51,9 +61,6 @@ class Dicegame
     when guess_num <= 0 
       puts "too low"
       play_the_game
-    # else 
-    #   puts "Guess a number 1 - 6"
-    #   play_the_game
     end
     @die = 1 + rand(6)
     puts "The rolled die is : #{@die}"
@@ -68,7 +75,7 @@ class Dicegame
   
   def win_screen
     puts "How did you do that?!"
-    puts "      You Won!       "
+    puts "      YOU WON!       "
     puts "Would you like to play again?! y/n"
     play_again = gets.chomp
     case 
@@ -97,7 +104,12 @@ class Dicegame
     when play_again_lose == "n"
       puts "Thanks for playing!"
       puts "You have #{@wallet.amount}!"
-      return @wallet
+        if @wallet.amount == 0
+          puts "You don't have any money left, come back when you get your next paycheck"
+          exit!
+        else
+          return @wallet
+        end
     else 
       puts "Please try again"
       lose_screen
