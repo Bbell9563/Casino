@@ -1,7 +1,6 @@
 require_relative 'deck'
 require_relative 'card'
-require_relative 'app'
-require lita-applause 
+require_relative 'wallet'
 
 class War
   def initialize
@@ -21,11 +20,10 @@ class War
     war_intro
     shuffle_cards 
     dealer_cards
-    player_cards
+    player_cards 
     card_draw
     winner
   end 
-
   def render_soldier_art 
     file.readlines("text.txt") do |line|
       puts line 
@@ -80,6 +78,8 @@ class War
     #wallet cash out 
   when 3 
     menu_games 
+end 
+end 
 end 
 
 War.new 

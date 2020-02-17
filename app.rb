@@ -1,7 +1,9 @@
-# require_relative = 'deck'
-# require_relative = 'dice'
+require_relative 'deck'
+require_relative 'dice'
 require_relative 'user'
 require_relative 'wallet'
+require_relative 'war' 
+
 
 class App 
     def initialize
@@ -52,6 +54,7 @@ class App
             puts 'you chose Blackjack'
         when 4
             puts 'you chose War'
+            war_app 
         when 5 
             puts '++++++++++++++++++++++'
             puts 'OK, have a nice day :)'
