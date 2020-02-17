@@ -2,6 +2,7 @@
 # require_relative = 'dice'
 require_relative 'user'
 require_relative 'wallet'
+require_relative 'blackjack'
 
 class App 
     def initialize
@@ -9,6 +10,7 @@ class App
         @wallet = Wallet.new(100)
         #to add things to this wallet use => @wallet.add("put the integer inside that you want to add")
         #to subtract an amount from the wallet use => @wallet.remove("put the integer inside that you want to subtract")
+        @black = Blackjack.new
         menu()
     end
     def menu 
@@ -50,6 +52,9 @@ class App
             puts 'you chose High or Low'
         when 3
             puts 'you chose Blackjack'
+            @wallet = @black.play_game(@wallet)
+            menu_games
+
         when 4
             puts 'you chose War'
         when 5 
