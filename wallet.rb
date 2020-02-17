@@ -1,7 +1,7 @@
 class Wallet
   attr_accessor :amount
-  def initialize(amount)
-    @amount = amount
+  def initialize()
+    @amount = 300
   end
 
   def add(number)
@@ -21,14 +21,14 @@ end
 
 
 #Brianna -USING THE .check_balance METHOD TO CHECK IF THE USER HAS ENOUGH MONEY TO PLAYUYFA543
-#
-wallet = Wallet.new(100)
+# #
+# wallet = Wallet.new(100)
 
-user_input = gets.to_i
-if wallet.check_balance(user_input) == true
-  puts "returned true"
-else
-  puts "returned false"
-end
+# user_input = gets.to_i
+# if wallet.check_balance(user_input) == true
+#   puts "returned true"
+# else
+#   puts "returned false"
+# end
 
-wallet.add(user_iputs)
+# wallet.add(user_iputs)
