@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 require_relative 'deck'
 require_relative 'dice'
 require_relative 'user'
 require_relative 'wallet'
 require_relative 'war' 
 
+=======
+# require_relative = 'deck'
+require_relative = 'dicegame'
+require_relative 'user'
+require_relative 'wallet'
+require_relative 'blackjack'
+>>>>>>> 13322ea08aac2c7aea8b838e6a6e87bc5bd5857d
 
 class App 
     def initialize
@@ -11,6 +19,8 @@ class App
         @wallet = Wallet.new(100)
         #to add things to this wallet use => @wallet.add("put the integer inside that you want to add")
         #to subtract an amount from the wallet use => @wallet.remove("put the integer inside that you want to subtract")
+        @black = Blackjack.new
+        # @dicegame = Dicegame.new
         menu()
     end
     def menu 
@@ -39,7 +49,7 @@ class App
     end
     def menu_games
         puts '1) Slots'
-        puts '2) High or Low'
+        puts '2) Dice Game'
         puts '3) Blackjack'
         puts '4) War'
         puts '5) exit'
@@ -49,9 +59,12 @@ class App
         when 1 
             puts 'you chose Slots'
         when 2
-            puts 'you chose High or Low'
+            puts 'you chose Dice Game'
         when 3
             puts 'you chose Blackjack'
+            @wallet = @black.play_game(@wallet)
+            menu_games
+
         when 4
             puts 'you chose War'
             war_app 
