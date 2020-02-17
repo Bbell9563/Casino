@@ -3,10 +3,11 @@ require_relative 'wallet'
 class Dicegame
 
   def initialize
-
+    @betmade = 0
   end
 
-  def run
+  def run(wallet)
+    @wallet = wallet
     main_dice_menu
     place_your_bet
     play_the_game
@@ -21,10 +22,23 @@ class Dicegame
   end
   
   def place_your_bet
-    puts "You have #{} " #link wallet
+    puts "You have #{@wallet.amount}" #link wallet
     puts "How much would you like to bet?"
-    get_your_bet = gets.to_i
-    puts "You bet #{get_your_bet}"
+    @get_bet = get_your_bet = gets.to_i
+    if get_your_bet > 0
+      if @wallet.check_balance(get_your_bet) == true
+        @betmade += get_your_bet
+        puts "You bet #{get_your_bet}"
+      else
+        puts "Bet a different number"
+        place_your_bet
+      end
+
+    else 
+      puts "Bet a different number"
+      place_your_bet
+    end
+
   end
   
   def play_the_game
@@ -37,12 +51,17 @@ class Dicegame
     when guess_num <= 0 
       puts "too low"
       play_the_game
+    # else 
+    #   puts "Guess a number 1 - 6"
+    #   play_the_game
     end
     @die = 1 + rand(6)
     puts "The rolled die is : #{@die}"
     if @die == guess_num
+      @wallet.add(@get_bet)
       win_screen
     else 
+      @wallet.remove(@get_bet)
       lose_screen
     end
   end
@@ -54,12 +73,12 @@ class Dicegame
     play_again = gets.chomp
     case 
     when play_again == 'y'
-      run
+      place_your_bet
+      play_the_game
     when play_again == 'n'
       puts "Thanks for playing!"
-      # menu_games
-      #you have this much money
-      #send to main app
+      puts "You have #{@wallet.amount}!"
+      return @wallet
     else 
       puts "Please try again"
       win_screen
@@ -73,18 +92,15 @@ class Dicegame
     play_again_lose = gets.chomp
     case
     when play_again_lose == 'y'
-      run
+      place_your_bet
+      play_the_game
     when play_again_lose == "n"
       puts "Thanks for playing!"
-      # menu_games
-      #you have this much money
-      #send back to main app
+      puts "You have #{@wallet.amount}!"
+      return @wallet
     else 
       puts "Please try again"
       lose_screen
     end
   end
-
-
 end
-Dicegame.new.run
