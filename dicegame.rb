@@ -1,6 +1,11 @@
-# require_relative 'diceroller'
+require_relative 'wallet'
 
 class Dicegame
+
+  def initialize
+
+  end
+
   def run
     main_dice_menu
     place_your_bet
@@ -16,7 +21,7 @@ class Dicegame
   end
   
   def place_your_bet
-    puts "You have" #link wallet
+    puts "You have #{} " #link wallet
     puts "How much would you like to bet?"
     get_your_bet = gets.to_i
     puts "You bet #{get_your_bet}"
@@ -29,7 +34,7 @@ class Dicegame
     when guess_num > 6
       puts "too high"
       play_the_game
-    when guess_num < 0 
+    when guess_num <= 0 
       puts "too low"
       play_the_game
     end
@@ -46,13 +51,18 @@ class Dicegame
     puts "How did you do that?!"
     puts "      You Won!       "
     puts "Would you like to play again?! y/n"
-    play_again = gets.strip
+    play_again = gets.chomp
     case 
-    when 'y'
+    when play_again == 'y'
       run
-    when 'n'
+    when play_again == 'n'
       puts "Thanks for playing!"
+      # menu_games
       #you have this much money
+      #send to main app
+    else 
+      puts "Please try again"
+      win_screen
     end
 
   end
@@ -60,14 +70,18 @@ class Dicegame
   def lose_screen
     puts "Better luck next time!"
     puts "Would you like to play again?! y/n"
-    play_again_lose = gets.strip
+    play_again_lose = gets.chomp
     case
-    when play_again_lose = 'y'
+    when play_again_lose == 'y'
       run
-    when play_again_lose = "n"
+    when play_again_lose == "n"
       puts "Thanks for playing!"
+      # menu_games
       #you have this much money
       #send back to main app
+    else 
+      puts "Please try again"
+      lose_screen
     end
   end
 
