@@ -11,17 +11,28 @@ require_relative 'dicegame'
 require_relative 'user'
 require_relative 'wallet'
 require_relative 'blackjack'
+<<<<<<< HEAD
 >>>>>>> 13322ea08aac2c7aea8b838e6a6e87bc5bd5857d
+=======
+require_relative 'slots'
+
+>>>>>>> 1034d1aef5f8212dbcb2c0e3113cf214d9dc2951
 
 class App 
+    attr_accessor :wallet_amount
     def initialize
         @user = User.new
-        @wallet = Wallet.new(100)
+        @wallet = Wallet.new
+        @wallet_amount = @wallet.amount
         #to add things to this wallet use => @wallet.add("put the integer inside that you want to add")
         #to subtract an amount from the wallet use => @wallet.remove("put the integer inside that you want to subtract")
         @black = Blackjack.new
         @dicegame = Dicegame.new
+<<<<<<< HEAD
         @war = War.new 
+=======
+        @slots = Slots.new
+>>>>>>> 1034d1aef5f8212dbcb2c0e3113cf214d9dc2951
         menu()
     end
     def menu 
@@ -45,7 +56,8 @@ class App
         puts 'What is your name?'
         @user_name = @user.user_name.chomp
         puts '++++++++++++++++++++++'
-        puts "Hello #{@user_name} please choose a game"
+        puts "Hello #{@user_name} your balance is #{@wallet_amount}"
+        puts 'please choose a game'
         puts '++++++++++++++++++++++'
     end
     def menu_games
@@ -59,6 +71,8 @@ class App
         case user_choice
         when 1 
             puts 'you chose Slots'
+            @wallet = @slots.game(@wallet)
+            menu_games
         when 2
             puts 'you chose Dice Game'
             @wallet = @dicegame.run(@wallet)
@@ -70,7 +84,7 @@ class App
 
         when 4
             puts 'you chose War'
-            @wallet =war.play_war_game(@wallet)
+            @wallet = @war.play_war_game(@wallet)
         when 5 
             puts '++++++++++++++++++++++'
             puts 'OK, have a nice day :)'
@@ -88,5 +102,5 @@ class App
 
 end
 
-word = App.new
-puts word
+testing = App.new
+puts testing 

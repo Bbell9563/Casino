@@ -9,7 +9,7 @@ class War
     @player_cards = []
     @player_score = 0
     @dealer_score = 0
-    @wallet = Wallet.new(100)
+    @wallet = Wallet.new
   end 
 
   def deal_dealer_cards 
@@ -69,8 +69,8 @@ class War
     play_war_game
   end 
 
-  def play_war_game
-    # @wallet = wallet 
+  def play_war_game(wallet)
+    @wallet = wallet 
     deal_dealer_cards
     deal_player_cards 
     winner
@@ -80,8 +80,8 @@ class War
  
 
   def winner 
-    add_player_score
     add_dealer_score
+    add_player_score
     puts "+++++++++++++++++++++++++++++++++"
     if @dealer_score > @player_score 
       puts "Dealer Wins."
