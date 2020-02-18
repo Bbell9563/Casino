@@ -7,7 +7,7 @@ require_relative 'war'
 
 =======
 # require_relative = 'deck'
-require_relative = 'dicegame'
+require_relative 'dicegame'
 require_relative 'user'
 require_relative 'wallet'
 require_relative 'blackjack'
@@ -20,7 +20,8 @@ class App
         #to add things to this wallet use => @wallet.add("put the integer inside that you want to add")
         #to subtract an amount from the wallet use => @wallet.remove("put the integer inside that you want to subtract")
         @black = Blackjack.new
-        # @dicegame = Dicegame.new
+        @dicegame = Dicegame.new
+        @war = War.new 
         menu()
     end
     def menu 
@@ -60,6 +61,8 @@ class App
             puts 'you chose Slots'
         when 2
             puts 'you chose Dice Game'
+            @wallet = @dicegame.run(@wallet)
+            menu_games
         when 3
             puts 'you chose Blackjack'
             @wallet = @black.play_game(@wallet)
@@ -67,7 +70,7 @@ class App
 
         when 4
             puts 'you chose War'
-            war_app 
+            @wallet =war.play_war_game(@wallet)
         when 5 
             puts '++++++++++++++++++++++'
             puts 'OK, have a nice day :)'

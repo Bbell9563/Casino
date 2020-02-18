@@ -69,7 +69,8 @@ class Blackjack
       @dealer_cards << @deck.deal
       add_dealer_score
       if @dealer_score > 21
-        puts "you win, dealer bust"
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts "You win!, Dealer bust"
         @wallet.amount += @player_bet 
         @wallet.amount += @player_bet 
         clear_game
@@ -78,6 +79,7 @@ class Blackjack
         dealer_choice 
       end
     else   
+      puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
       puts "The dealer wins"
       clear_game
     end 
@@ -145,17 +147,26 @@ class Blackjack
   end 
 
   def play_game(wallet)
-    @wallet = wallet
-    ask_for_bet
-    puts "Your cards are:"
-    deal_player_cards
-    add_player_score
-    puts "~~~~~~~~~~~~~~~~~~~~~~~~~"
-    deal_dealer_cards
-    add_dealer_score
-    puts "~~~~~~~~~~~~~~~~~~~~~~~~~"
-    player_choice 
-    return @wallet
+    player_playing = true
+    while player_playing == true
+      @wallet = wallet
+      ask_for_bet
+      puts "Your cards are:"
+      deal_player_cards
+      add_player_score
+      puts "~~~~~~~~~~~~~~~~~~~~~~~~~"
+      deal_dealer_cards
+      add_dealer_score
+      puts "~~~~~~~~~~~~~~~~~~~~~~~~~"
+      player_choice 
+      puts "press enter to replay or 'QUIT' to quit"
+      player_done = gets.chomp
+      if player_done =='QUIT'
+        return @wallet
+      else  
+        player_playing == true 
+      end
+    end
   end
 
 
