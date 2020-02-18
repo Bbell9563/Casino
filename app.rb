@@ -1,22 +1,12 @@
-<<<<<<< HEAD
-require_relative 'deck'
-require_relative 'dice'
-require_relative 'user'
-require_relative 'wallet'
-require_relative 'war' 
 
-=======
 # require_relative = 'deck'
 require_relative 'dicegame'
 require_relative 'user'
 require_relative 'wallet'
 require_relative 'blackjack'
-<<<<<<< HEAD
->>>>>>> 13322ea08aac2c7aea8b838e6a6e87bc5bd5857d
-=======
 require_relative 'slots'
+require_relative 'war'
 
->>>>>>> 1034d1aef5f8212dbcb2c0e3113cf214d9dc2951
 
 class App 
     attr_accessor :wallet_amount
@@ -28,11 +18,9 @@ class App
         #to subtract an amount from the wallet use => @wallet.remove("put the integer inside that you want to subtract")
         @black = Blackjack.new
         @dicegame = Dicegame.new
-<<<<<<< HEAD
         @war = War.new 
-=======
         @slots = Slots.new
->>>>>>> 1034d1aef5f8212dbcb2c0e3113cf214d9dc2951
+        @war = War.new
         menu()
     end
     def menu 
@@ -83,7 +71,8 @@ class App
 
         when 4
             puts 'you chose War'
-            @wallet = @war.play_war_game(@wallet)
+            @wallet = @war.war_app(@wallet, @user_name)
+            menu_games
         when 5 
             puts '++++++++++++++++++++++'
             puts 'OK, have a nice day :)'

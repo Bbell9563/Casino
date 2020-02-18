@@ -9,7 +9,7 @@ class War
     @player_cards = []
     @player_score = 0
     @dealer_score = 0
-    @wallet = Wallet.new
+    # @wallet = Wallet.new
   end 
 
   def deal_dealer_cards 
@@ -18,7 +18,7 @@ class War
   end 
 
   def deal_player_cards 
-    puts '#{user_name} drew:'
+    puts "#{@user_name} drew:"
     @player_cards << @deck.deal 
   end 
 
@@ -45,13 +45,13 @@ class War
     @player_score = 0
     @player_cards.each do |card|
       if card.rank.to_s == 'J' 
-        @dealer_score += 11
+        @player_score += 11
       elsif card.rank.to_s == 'Q'
-        @dealer_score += 12 
+        @player_score += 12 
       elsif card.rank.to_s == 'K'
-        @dealer_score += 13
+        @player_score += 13
       elsif card.rank.to_s == 'A'
-        @dealer_score += 14 
+        @player_score += 14 
       else  
         integer_score = card.rank.to_i 
         @player_score += integer_score
@@ -60,17 +60,18 @@ class War
   end 
 
   def war_intro 
-    puts 'War is a simple game of chance. #{@user_name} and dealer will draw a card at the same time. If you have the higher card you win and $5.00 will be added to your balance. If dealer card is higher, you lose and $5.00 will be deducted.'
+    puts "War is a simple game of chance. #{@user_name} and dealer will draw a card at the same time. If you have the higher card you win and $5.00 will be added to your balance. If dealer card is higher, you lose and $5.00 will be deducted."
     puts '++++++++++++++++++++++++++++++++++++++++++'
   end 
 
-  def war_app 
+  def war_app(wallet, user_name)
+    @wallet = wallet 
+    @user_name = user_name
     war_intro
     play_war_game
   end 
 
-  def play_war_game(wallet)
-    @wallet = wallet 
+  def play_war_game
     deal_dealer_cards
     deal_player_cards 
     winner
@@ -103,19 +104,20 @@ class War
     puts '1) Play again'
     puts '2) Return to Menu'
     input = gets.to_i
-    case 
+    case input
     when 1 
       @player_cards.clear 
       @dealer_cards.clear 
       play_war_game
     when 2
-     returns @wallet 
+     return @wallet 
     else 
       puts "Invalid Choice"
+      return @wallet
     end 
   end 
 end 
 
-start = War.new
-start.war_app  
+# start = War.new
+# start.war_app  
 

@@ -17,6 +17,16 @@ class Blackjack
     card << @deck.deal_card
   end
 
+  def deal_dealer_card
+    @dealer_cards << @deck.deal_card
+    puts " 
+       ___
+      |   |
+      | ? |
+      |___|"
+  end 
+
+
   def add_score(score, cards, name)
     score = 0
     cards.each do |card|
@@ -123,7 +133,8 @@ class Blackjack
     / \\ (_) | |_| | | (__| | | | (_) \\__ \\  __/  _ _ _ _ 
     \\_/\\___/ \\__,_|  \\___|_| |_|\\___/|___/\\___| (_|_|_|_)
                                       
-"                                 
+"    
+    sleep(1)                             
     puts "
     ____    ___                    __       _____                   __         
    /\\  _`\\ /\\_ \\                  /\\ \\     /\\___ \\                 /\\ \\        
@@ -135,6 +146,7 @@ class Blackjack
                                                                                
                                                                                
    "
+    sleep(1)
     # puts "♥︎, ♦,♠,♣"
     player_playing = true
     while player_playing == true
@@ -144,7 +156,8 @@ class Blackjack
       deal_cards(@player_cards)
       @player_score = add_score(@player_score, @player_cards, "Your")
       puts "~~~~~~~~~~~~~~~~~~~~~~~~~"
-      deal_cards(@dealer_cards)
+      sleep(2)
+      deal_dealer_card
       @dealer_score = add_score(@dealer_score, @dealer_cards, "Dealer")
       puts "~~~~~~~~~~~~~~~~~~~~~~~~~"
       player_choice 
