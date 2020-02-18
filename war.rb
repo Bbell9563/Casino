@@ -18,7 +18,11 @@ class War
   end 
 
   def deal_player_cards 
+<<<<<<< HEAD
     puts "#{@user_name} drew:"
+=======
+    puts " #{@user_name} drew:"
+>>>>>>> d4fdb332336dcc4e28930d1896453fede15538bb
     @player_cards << @deck.deal 
   end 
 
