@@ -14,7 +14,7 @@ class War
 
   def deal_dealer_cards 
     puts 'Dealer drew:'
-    @dealer_cards << @deck.deal
+    @dealer_cards << @deck.deal_card 
   end 
 
   def deal_player_cards 
