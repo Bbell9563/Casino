@@ -33,14 +33,66 @@ class Deck
        puts "#{card.rank} #{card.suit} (#{card.color})"
      end
    end
-
-
+   
    def deal
 
     dealt = @cards.pop
     puts "#{dealt.rank} #{dealt.suit} (#{dealt.color})"
     return dealt 
 
+   end
+
+   def deal_card
+
+    dealt = @cards.pop
+    if dealt.suit == 'Hearts'
+      puts "
+      ______________
+     | #{dealt.rank}            |
+     |              |
+     |    /\\   /\\   |
+     |    \\  V  /   |
+     |     \\   /    |
+     |       V      |
+     |            #{dealt.rank} |
+     |______________|"
+
+    elsif dealt.suit == 'Spades'
+      puts "
+       ______________
+      | #{dealt.rank}            |
+      |      ||      |
+      |     /  \\     |
+      |    /    \\    |
+      |   / _  _ \\   |
+      |  (_/ || \\_)  |
+      |      ||    #{dealt.rank} |
+      |______________|"
+
+    elsif dealt.suit == 'Diamonds'
+      puts "
+       ______________
+      | #{dealt.rank}            |
+      |      /\\      |
+      |     /  \\     |
+      |    /    \\    |
+      |    \\    /    |
+      |     \\  /     |
+      |      \\/    #{dealt.rank} |
+      |______________|"
+    else  
+      puts "
+       ______________
+      | #{dealt.rank}            |
+      |      __      |
+      |     /  \\     |
+      |   __|  |__   |
+      |  (___  ___)  |
+      |      ||      |
+      |      ||    #{dealt.rank} |
+      |______________|"
+    end
+    return dealt 
    end
  end
   
