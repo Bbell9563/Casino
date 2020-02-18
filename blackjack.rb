@@ -2,7 +2,6 @@ require_relative 'deck'
 require_relative 'card'
 require_relative 'wallet'
 
-
 class Blackjack 
   def initialize
     @deck = Deck.new
@@ -11,70 +10,43 @@ class Blackjack
     @player_score = 0
     @dealer_score = 0 
     @player_bet = 0
-
   end
 
-  def deal_player_cards
-    @player_cards << @deck.deal
-    @player_cards << @deck.deal
-    
-
+  def deal_cards(card)
+    card << @deck.deal_card
+    card << @deck.deal_card
   end
 
-  def deal_dealer_cards
-    @dealer_cards <<@deck.deal
-    @dealer_cards <<@deck.deal
-  end
-
-  def add_player_score
-    @player_score = 0
-    @player_cards.each do |card|
+  def add_score(score, cards, name)
+    score = 0
+    cards.each do |card|
       if card.rank.to_s == 'K' || card.rank.to_s == 'Q' || card.rank.to_s == 'J'|| card.rank.to_s == '10'
-        @player_score += 10
+        score += 10
       elsif card.rank.to_s =="A"
-        if @player_score + 11 <= 21
-          @player_score += 11
+        if score + 11 <= 21
+          score += 11
         else  
-          @player_score += 1 
+          score += 1 
         end
       else  
         integer_score = card.rank.to_i 
-        @player_score += integer_score
+        score += integer_score
       end
     end 
-    puts "Your current score is #{@player_score}"
-  end
-
-  def add_dealer_score
-    @dealer_score = 0
-    @dealer_cards.each do |card|
-      if card.rank.to_s == 'K' || card.rank.to_s == 'Q' || card.rank.to_s == 'J'|| card.rank.to_s == '10'
-        @dealer_score += 10
-      elsif card.rank.to_s =="A"
-        if @dealer_score + 11 <= 21
-          @dealer_score += 11
-        else  
-          @dealer_score += 1 
-        end
-      else  
-        integer_score = card.rank.to_i 
-        @dealer_score += integer_score
-      end
-    end 
-    puts "The Dealers score is #{@dealer_score}"
+    puts "#{name} score is #{score}"
+    return score
   end
 
   def dealer_choice 
     if @dealer_score <= @player_score 
-      @dealer_cards << @deck.deal
-      add_dealer_score
+      @dealer_cards << @deck.deal_card
+      @dealer_score = add_score(@dealer_score, @dealer_cards, "Dealer")
       if @dealer_score > 21
         puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         puts "You win!, Dealer bust"
         @wallet.amount += @player_bet 
         @wallet.amount += @player_bet 
         clear_game
-
       else  
         dealer_choice 
       end
@@ -83,9 +55,6 @@ class Blackjack
       puts "The dealer wins"
       clear_game
     end 
-
-    
-
   end
 
   def clear_game
@@ -105,8 +74,8 @@ class Blackjack
       @player_cards.each do |card|
         puts "#{card.rank} #{card.suit} (#{card.color})"
       end
-      @player_cards <<@deck.deal
-      add_player_score
+      @player_cards <<@deck.deal_card
+      @player_score = add_score(@player_score, @player_cards, "Your")
       if @player_score > 21 
         puts "Sorry you lost $#{@player_bet}"
         clear_game
@@ -116,12 +85,13 @@ class Blackjack
     end 
   end
 
-
-
   def ask_for_bet
     puts "Its time to bet"
     puts "~~~~~~~~~~~~~~~"
     puts "Minimum bet is 5 dollars"
+    puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    puts "You have #{@wallet.amount}"
+    puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     puts "How much would you like to bet?"
     player_bet = true
     while player_bet == true 
@@ -134,7 +104,6 @@ class Blackjack
           puts "You have $#{@wallet.amount} left in your wallet"
           puts "Lets play"
           return player_bet == false
-          
         else  
           puts "Sorry, you do not have enough to make that bet"
         end
@@ -147,16 +116,36 @@ class Blackjack
   end 
 
   def play_game(wallet)
+    puts "
+                          _                              
+   /\\_/\\___  _   _    ___| |__   ___  ___  ___           
+   \\_ _/ _ \\| | | |  / __| '_ \\ / _ \\/ __|/ _ \\          
+    / \\ (_) | |_| | | (__| | | | (_) \\__ \\  __/  _ _ _ _ 
+    \\_/\\___/ \\__,_|  \\___|_| |_|\\___/|___/\\___| (_|_|_|_)
+                                      
+"                                 
+    puts "
+    ____    ___                    __       _____                   __         
+   /\\  _`\\ /\\_ \\                  /\\ \\     /\\___ \\                 /\\ \\        
+   \\ \\ \\L\\ \\//\\ \\      __      ___\\ \\ \\/'\\ \\/__/\\ \\     __      ___\\ \\ \\/'\\    
+    \\ \\  _ <'\\ \\ \\   /'__`\\   /'___\\ \\ , <    _\\ \\ \\  /'__`\\   /'___\\ \\ , <    
+     \\ \\ \\L\\ \\\\_\\ \\_/\\ \\L\\.\\_/\\ \\__/\\ \\ \\\\`\\ /\\ \\_\\ \\/\\ \\L\\.\\_/\\ \\__/\\ \\ \\\\`\\  
+      \\ \\____//\\____\\ \\__/.\\_\\ \\____\\\\ \\_\\ \\_\\ \\____/\\ \\__/.\\_\\ \\____\\\\ \\_\\ \\_\\
+       \\/___/ \\/____/\\/__/\\/_/\\/____/ \\/_/\\/_/\\/___/  \\/__/\\/_/\\/____/ \\/_/\\/_/
+                                                                               
+                                                                               
+   "
+    # puts "♥︎, ♦,♠,♣"
     player_playing = true
     while player_playing == true
       @wallet = wallet
       ask_for_bet
       puts "Your cards are:"
-      deal_player_cards
-      add_player_score
+      deal_cards(@player_cards)
+      @player_score = add_score(@player_score, @player_cards, "Your")
       puts "~~~~~~~~~~~~~~~~~~~~~~~~~"
-      deal_dealer_cards
-      add_dealer_score
+      deal_cards(@dealer_cards)
+      @dealer_score = add_score(@dealer_score, @dealer_cards, "Dealer")
       puts "~~~~~~~~~~~~~~~~~~~~~~~~~"
       player_choice 
       puts "press enter to replay or 'QUIT' to quit"
@@ -168,15 +157,4 @@ class Blackjack
       end
     end
   end
-
-
-
-
 end
-
-# black = Blackjack.new
-# black.deal_dealer_cards
-# black.add_dealer_score
-
-# ß
-

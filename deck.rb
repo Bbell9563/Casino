@@ -28,22 +28,96 @@ class Deck
     shuffle_cards
   end
  
-   def display_cards
-     @cards.each do |card|
-       puts "#{card.rank} #{card.suit} (#{card.color})"
-     end
-   end
-
-
-   def deal
-
+  def display_cards
+    @cards.each do |card|
+      puts "#{card.rank} #{card.suit} (#{card.color})"
+    end
+  end
+   
+  def deal
     dealt = @cards.pop
     puts "#{dealt.rank} #{dealt.suit} (#{dealt.color})"
     return dealt 
+  end
 
-   end
+  def deal_card
+    dealt = @cards.pop
+    if dealt.rank =="10"
+      if dealt.suit == 'Hearts'
+        puts " 
+         ___
+        |#{dealt.rank} |
+        | ♥︎ |
+        |_#{dealt.rank}|"
+
+      elsif dealt.suit == 'Spades'
+        puts " 
+         ___
+        |#{dealt.rank} |
+        | ♠ |
+        |_#{dealt.rank}|
+        "
+
+      elsif dealt.suit == 'Diamonds'
+        puts " 
+         ___
+        |#{dealt.rank} |
+        | ♦ |
+        |_#{dealt.rank}|"
+      else  
+        puts " 
+         ___
+        |#{dealt.rank} |
+        | ♣ |
+        |_#{dealt.rank}|"
+      end
+
+    else  
+      if dealt.suit == 'Hearts'
+        puts " 
+         ___
+        |#{dealt.rank}  |
+        | ♥︎ |
+        |__#{dealt.rank}|"
+
+      elsif dealt.suit == 'Spades'
+        puts " 
+         ___
+        |#{dealt.rank}  |
+        | ♠ |
+        |__#{dealt.rank}|
+        "
+
+      elsif dealt.suit == 'Diamonds'
+        puts " 
+         ___
+        |#{dealt.rank}  |
+        | ♦ |
+        |__#{dealt.rank}|"
+      else  
+        puts " 
+         ___
+        |#{dealt.rank}  |
+        | ♣ |
+        |__#{dealt.rank}|"
+      end
+    end
+    return dealt 
  end
+end
   
+
+
+
+
+
+
+
+
+
+
+
+
 
  # Instantiate a new deck
 # d = Deck.new

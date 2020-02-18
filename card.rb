@@ -10,3 +10,8 @@ class Card
   end
 
  end
+
+
+
+
+
