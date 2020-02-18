@@ -16,8 +16,8 @@ class App
         #to subtract an amount from the wallet use => @wallet.remove("put the integer inside that you want to subtract")
         @black = Blackjack.new
         @dicegame = Dicegame.new
-        menu()
         @slots = Slots.new
+        menu()
     end
     def menu 
         puts '++++++++++++++++++++++'
@@ -55,7 +55,8 @@ class App
         case user_choice
         when 1 
             puts 'you chose Slots'
-            @slots
+            @wallet = @slots.game(@wallet)
+            menu_games
         when 2
             puts 'you chose Dice Game'
             @wallet = @dicegame.run(@wallet)

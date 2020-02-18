@@ -12,8 +12,6 @@ require_relative 'wallet'
 
 class Slots 
     def initialize
-        @wallet = Wallet.new
-        game
     end
     def random_symbols
         symbols = ['[7]', '[Clover]', '[Bell]', '[BAR]', '[Fruit]', '[Diamond]', '[JACKPOT]']
@@ -23,8 +21,7 @@ class Slots
         if @wallet.amount == 0
             puts "Your current balance is #{@wallet.amount} you don't have enough to play..."
             puts 'Thank you for wasting all your money at Ruby casino, have a nice day!'
-
-            exit 
+            App.new.menu
         else
         end
         puts '++++++++++++++++++++++'
@@ -104,10 +101,11 @@ class Slots
             game
         end
     end
-    def game
+    def game(wallet)
         puts '++++++++++++++++++++++'
         puts 'Welcome to ruby slots!'
         puts '++++++++++++++++++++++'
+        @wallet = wallet 
         bet_pull
     end
 

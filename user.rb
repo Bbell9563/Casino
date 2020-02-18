@@ -1,4 +1,4 @@
-require_relative 'wallet'
+
 
 class User
     attr_accessor 
