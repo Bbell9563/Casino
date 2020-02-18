@@ -11,14 +11,11 @@ class Blackjack
     @player_score = 0
     @dealer_score = 0 
     @player_bet = 0
-
   end
 
   def deal_player_cards
     @player_cards << @deck.deal
     @player_cards << @deck.deal
-    
-
   end
 
   def deal_dealer_cards
@@ -61,7 +58,7 @@ class Blackjack
         @dealer_score += integer_score
       end
     end 
-    puts "The Dealers score is #{@dealer_score}"
+    puts "The Dealer score is #{@dealer_score}"
   end
 
   def dealer_choice 
@@ -74,7 +71,6 @@ class Blackjack
         @wallet.amount += @player_bet 
         @wallet.amount += @player_bet 
         clear_game
-
       else  
         dealer_choice 
       end
@@ -83,9 +79,6 @@ class Blackjack
       puts "The dealer wins"
       clear_game
     end 
-
-    
-
   end
 
   def clear_game
@@ -116,8 +109,6 @@ class Blackjack
     end 
   end
 
-
-
   def ask_for_bet
     puts "Its time to bet"
     puts "~~~~~~~~~~~~~~~"
@@ -134,7 +125,6 @@ class Blackjack
           puts "You have $#{@wallet.amount} left in your wallet"
           puts "Lets play"
           return player_bet == false
-          
         else  
           puts "Sorry, you do not have enough to make that bet"
         end
@@ -168,15 +158,6 @@ class Blackjack
       end
     end
   end
-
-
-
-
 end
 
-# black = Blackjack.new
-# black.deal_dealer_cards
-# black.add_dealer_score
-
-# ß
 
