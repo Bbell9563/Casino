@@ -18,7 +18,7 @@ class War
   end 
 
   def deal_player_cards 
-    puts '#{user_name} drew:'
+    puts " #{@user_name} drew:"
     @player_cards << @deck.deal 
   end 
 
