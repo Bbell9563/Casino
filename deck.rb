@@ -28,74 +28,96 @@ class Deck
     shuffle_cards
   end
  
-   def display_cards
-     @cards.each do |card|
-       puts "#{card.rank} #{card.suit} (#{card.color})"
-     end
-   end
+  def display_cards
+    @cards.each do |card|
+      puts "#{card.rank} #{card.suit} (#{card.color})"
+    end
+  end
    
-   def deal
-
+  def deal
     dealt = @cards.pop
     puts "#{dealt.rank} #{dealt.suit} (#{dealt.color})"
     return dealt 
+  end
 
-   end
-
-   def deal_card
-
+  def deal_card
     dealt = @cards.pop
-    if dealt.suit == 'Hearts'
-      puts "
-      ______________
-     | #{dealt.rank}            |
-     |              |
-     |    /\\   /\\   |
-     |    \\  V  /   |
-     |     \\   /    |
-     |       V      |
-     |            #{dealt.rank} |
-     |______________|"
+    if dealt.rank =="10"
+      if dealt.suit == 'Hearts'
+        puts " 
+         ___
+        |#{dealt.rank} |
+        | ♥︎ |
+        |_#{dealt.rank}|"
 
-    elsif dealt.suit == 'Spades'
-      puts "
-       ______________
-      | #{dealt.rank}            |
-      |      ||      |
-      |     /  \\     |
-      |    /    \\    |
-      |   / _  _ \\   |
-      |  (_/ || \\_)  |
-      |      ||    #{dealt.rank} |
-      |______________|"
+      elsif dealt.suit == 'Spades'
+        puts " 
+         ___
+        |#{dealt.rank} |
+        | ♠ |
+        |_#{dealt.rank}|
+        "
 
-    elsif dealt.suit == 'Diamonds'
-      puts "
-       ______________
-      | #{dealt.rank}            |
-      |      /\\      |
-      |     /  \\     |
-      |    /    \\    |
-      |    \\    /    |
-      |     \\  /     |
-      |      \\/    #{dealt.rank} |
-      |______________|"
+      elsif dealt.suit == 'Diamonds'
+        puts " 
+         ___
+        |#{dealt.rank} |
+        | ♦ |
+        |_#{dealt.rank}|"
+      else  
+        puts " 
+         ___
+        |#{dealt.rank} |
+        | ♣ |
+        |_#{dealt.rank}|"
+      end
+
     else  
-      puts "
-       ______________
-      | #{dealt.rank}            |
-      |      __      |
-      |     /  \\     |
-      |   __|  |__   |
-      |  (___  ___)  |
-      |      ||      |
-      |      ||    #{dealt.rank} |
-      |______________|"
+      if dealt.suit == 'Hearts'
+        puts " 
+         ___
+        |#{dealt.rank}  |
+        | ♥︎ |
+        |__#{dealt.rank}|"
+
+      elsif dealt.suit == 'Spades'
+        puts " 
+         ___
+        |#{dealt.rank}  |
+        | ♠ |
+        |__#{dealt.rank}|
+        "
+
+      elsif dealt.suit == 'Diamonds'
+        puts " 
+         ___
+        |#{dealt.rank}  |
+        | ♦ |
+        |__#{dealt.rank}|"
+      else  
+        puts " 
+         ___
+        |#{dealt.rank}  |
+        | ♣ |
+        |__#{dealt.rank}|"
+      end
     end
     return dealt 
-   end
  end
+end
   
+
+
+
+
+
+
+
+
+
+
+
+
 
  # Instantiate a new deck
 # d = Deck.new

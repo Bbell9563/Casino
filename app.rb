@@ -62,7 +62,6 @@ class App
             @wallet = @dicegame.run(@wallet)
             menu_games
         when 3
-            puts 'You chose Blackjack'
             @wallet = @black.play_game(@wallet)
             menu_games
 
