@@ -33,16 +33,19 @@ class Blackjack
       if card.rank.to_s == 'K' || card.rank.to_s == 'Q' || card.rank.to_s == 'J'|| card.rank.to_s == '10'
         score += 10
       elsif card.rank.to_s =="A"
-        if score + 11 <= 21
-          score += 11
-        else  
-          score += 1 
-        end
+        score += 11
       else  
         integer_score = card.rank.to_i 
         score += integer_score
       end
     end 
+    if score > 21
+      cards.each do |card|
+        if card.rank.to_s =='A'
+          score -= 10
+        end
+      end
+    end
     puts "#{name} score is #{score}"
     return score
   end
@@ -70,6 +73,7 @@ class Blackjack
   def clear_game
     @player_cards.clear
     @dealer_cards.clear
+    @deck = Deck.new
     @player_bet = 0
   end
 
@@ -88,6 +92,9 @@ class Blackjack
       @player_score = add_score(@player_score, @player_cards, "Your")
       if @player_score > 21 
         puts "Sorry you lost $#{@player_bet}"
+        clear_game
+      elsif @player_score == 21
+        puts "You Win!"
         clear_game
       else  
         player_choice
@@ -160,6 +167,11 @@ class Blackjack
       deal_dealer_card
       @dealer_score = add_score(@dealer_score, @dealer_cards, "Dealer")
       puts "~~~~~~~~~~~~~~~~~~~~~~~~~"
+      if @player_score == 21
+        puts "You Win!"
+        clear_game
+      end
+
       player_choice 
       puts "press enter to replay or 'QUIT' to quit"
       player_done = gets.chomp
